@@ -14,10 +14,11 @@ $ warn "foo not found" # "WARNING: foo not found"
 # info!, error!, warn! use stderr instead
 ```
 
-(Less) painful dependency checking:
+(Less) painful dependency/compatibility checking:
 
 ```bash
 $ installed? jq || (error! "i need jq" && exit 1)
+$ require bash4 || (error! "this script only works on bash 4 and above" && exit)
 ```
 
 (Less) painful file and string checking:
