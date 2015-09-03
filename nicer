@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
+# convenience output functions
+
 function error {
 	printf "ERROR: ${*}\n"
 }
 
+alias err=error
+
 function error! {
 	>&2 printf "ERROR: ${*}\n"
 }
+
+alias err!=error!
 
 function warn {
 	printf "WARNING: ${*}\n"
@@ -24,9 +30,13 @@ function info! {
 	>&2 printf "INFO: ${*}\n"
 }
 
+# installation checking functions
+
 function installed? {
 	return $(which ${1} > /dev/null)
 }
+
+# file/string checking functions
 
 function exists? {
 	return $([ -e ${1} ])
@@ -41,14 +51,6 @@ function directory? {
 }
 
 alias dir?=directory?
-
-function empty? {
-	return $([ -z ${1} ])
-}
-
-function nonempty? {
-	return $([ -n ${1} ])
-}
 
 function readable? {
 	return $([ -r ${1} ])
@@ -67,3 +69,11 @@ function executable? {
 }
 
 alias exec?=executable?
+
+function empty? {
+	return $([ -z ${1} ])
+}
+
+function nonempty? {
+	return $([ -n ${1} ])
+}
