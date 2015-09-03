@@ -1,7 +1,8 @@
 nicer-bash
 ==========
 
-Things to make `bash` scripting nicer.
+Things to make `bash` scripting nicer, partially inspired by `ruby`-style
+predicates.
 
 Convenient output functions:
 
@@ -35,6 +36,17 @@ $ nonempty? "${foo}"
 ```
 
 More to come.
+
+## Installation
+
+```bash
+$ git clone https://github.com/woodruffw/nicer-bash
+$ # put nicer-bash/nicer somewhere and source it from your .bashrc and/or scripts
+```
+
+## Is it a good idea to use `?` and `!` in `bash` functions?
+
+Maybe?
 
 ## License
 
