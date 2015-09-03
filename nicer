@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+function error {
+	printf "ERROR: ${*}\n"
+}
+
+function error! {
+	>&2 printf "ERROR: ${*}\n"
+}
+
+function warn {
+	printf "WARNING: ${*}\n"
+}
+
+function warn! {
+	>&2 printf "WARNING: ${*}\n"
+}
+
+function info {
+	printf "INFO: ${*}\n"
+}
+
+function info! {
+	>&2 printf "INFO: ${*}\n"
+}
+
+function installed? {
+	return $(which ${1} > /dev/null)
+}
+
+function exists? {
+	return $([ -e ${1} ])
+}
+
+function file? {
+	return $([ -f ${1} ])
+}
+
+function directory? {
+	return $([ -d ${1} ])
+}
+
+alias dir?=directory?
+
+function empty? {
+	return $([ -z ${1} ])
+}
+
+function nonempty? {
+	return $([ -n ${1} ])
+}
+
+function readable? {
+	return $([ -r ${1} ])
+}
+
+alias read?=readable?
+
+function writeable? {
+	return $([ -w ${1} ])
+}
+
+alias write?=writeable?
+
+function executable? {
+	return $([ -x ${1} ])
+}
+
+alias exec?=executable?
