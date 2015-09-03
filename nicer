@@ -75,10 +75,14 @@ function nonempty? {
 # dependency/compatibility functions
 
 function installed? {
-	# TODO: `which` is not POSIX, so this should be changed to `command -v`
-	# because `command -v` also picks up on aliases/functions, existence also
-	# needs to be checked.
-	return $(which ${1} > /dev/null)
+	if empty? "${1}"; then
+		error! "installed?: missing argument"
+		return 1
+	else
+		cmd=$(command -v "${1}")
+
+		return $(nonempty? "${cmd}" && file? "${cmd}")
+	fi
 }
 
 function require {
@@ -86,16 +90,16 @@ function require {
 		bash2 )	return $([[ "${BASH_VERSINFO[0]}" -ge 2 ]]) ;;
 		bash3 )	return $([[ "${BASH_VERSINFO[0]}" -ge 3 ]]) ;;
 		bash4 )	return $([[ "${BASH_VERSINFO[0]}" -ge 4 ]]) ;;
-		"" ) error! "require: missing requirement" ; return 1 ;;
+		"" ) error! "require: missing argument" ; return 1 ;;
 		* ) error! "require: unknown requirement '${1}'" ; return 1 ;;
 	esac
 }
 
 function require! {
-	if nonempty? "${1}"; then
-		require "${1}" || (error! "unsatisfied requirement: ${1}" && return 1)
-	else
-		error! "require: missing requirement"
+	if empty? "${1}"; then
+		error! "require: missing argument"
 		return 1
+	else
+		require "${1}" || (error! "unsatisfied requirement: ${1}" ; return 1)
 	fi
 }
