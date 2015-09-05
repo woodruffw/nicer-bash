@@ -163,8 +163,13 @@ function __require_perl {
 }
 
 function __require_perl5 {
-	local pl="printf %.0f $(perl -e 'print $];')"
+	local pl="perl -e 'print int($]);'"
 
 	installed? perl && [[ $(${pl}) -eq 5 ]]
+	return ${?}
+}
+
+function __require_ruby {
+	installed? ruby
 	return ${?}
 }
