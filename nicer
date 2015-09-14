@@ -2,6 +2,16 @@
 
 # convenience output functions
 
+function fatal {
+	printf "FATAL: ${*}\n"
+	exit 1
+}
+
+function fatal! {
+	>&2 printf "FATAL: ${*}\n"
+	exit 1
+}
+
 function error {
 	printf "ERROR: ${*}\n"
 }

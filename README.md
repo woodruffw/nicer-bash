@@ -10,8 +10,9 @@ Convenient output functions:
 $ info "foo not found" # "INFO: foo not found"
 $ error "foo not found" # "ERROR: foo not found"
 $ warn "foo not found" # "WARNING: foo not found"
+$ fatal "foo not found" # "FATAL: foo not found" and exits with $? 1
 
-# info!, error!, warn! use stderr instead
+# info!, error!, warn!, fatal! use stderr instead
 ```
 
 (Less) painful dependency/compatibility checking:
