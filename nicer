@@ -148,23 +148,29 @@ function __require_bash5 {
 	return ${?}
 }
 
+function __version_python {
+	local py_vers="python -c 'import sys; print(sys.version_info[0])'"
+	eval ${py_vers}
+}
+
 function __require_python {
 	installed? python
 	return ${?}
 }
 
 function __require_python2 {
-	local py="python -c 'import sys; print(sys.version_info[0])'"
-
-	installed? python2 || [[ $(${py}) -eq 2 ]]
+	installed? python2 || [[ $(__version_python) -eq 2 ]]
 	return ${?}
 }
 
 function __require_python3 {
-	local py="python -c 'import sys; print(sys.version_info[0])'"
-
-	installed? python3 || [[ $(${py}) -eq 2 ]]
+	installed? python3 || [[ $(__version_python) -eq 2 ]]
 	return ${1}
+}
+
+function __version_perl {
+	local pl_vers="perl -e 'print int($]);'"
+	eval ${pl_vers}
 }
 
 function __require_perl {
@@ -173,13 +179,42 @@ function __require_perl {
 }
 
 function __require_perl5 {
-	local pl="perl -e 'print int($]);'"
-
-	installed? perl && [[ $(${pl}) -eq 5 ]]
+	installed? perl && [[ $(__version_perl) -eq 5 ]]
 	return ${?}
+}
+
+function __version_ruby {
+	local rb_vers="ruby -e 'puts RUBY_VERSION[0..2]'"
+	eval ${rb_vers}
 }
 
 function __require_ruby {
 	installed? ruby
+	return ${?}
+}
+
+function __require_ruby18 {
+	installed? ruby1.8 || [[ $(__version_ruby) = "1.8" ]]
+	return ${?}
+}
+
+function __require_ruby19 {
+	installed? ruby1.9.1 || installed? ruby1.9.2 || installed? ruby1.9.3 || \
+		[[ $(__version_ruby) = "1.9" ]]
+	return ${?}
+}
+
+function __require_ruby20 {
+	installed? ruby2.0 || [[ $(__version_ruby) = "2.0" ]]
+	return ${?}
+}
+
+function __require_ruby21 {
+	installed? ruby2.1 || [[ $(__version_ruby) = "2.1" ]]
+	return ${?}
+}
+
+function __require_ruby22 {
+	installed? ruby2.2 || [[ $(__ruby_version) = "2.2" ]]
 	return ${?}
 }
