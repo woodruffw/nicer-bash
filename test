@@ -1,0 +1,171 @@
+diff --git a/nicer b/nicer
+index 219854c..6aeb584 100755
+--- a/nicer
++++ b/nicer
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env bash
+ 
++alias not='!'
++
+ # convenience output functions
+ 
+ function fatal {
+@@ -90,11 +92,18 @@ function nonempty? {
+ 	return ${?}
+ }
+ 
++function number? {
++	case "${1}" in
++		''|*[!0-9]* ) return 1 ;;
++		* ) return 0 ;;
++	esac
++}
++
+ # dependency/compatibility functions
+ 
+ function installed? {
+ 	if empty? "${1}"; then
+-		error! "installed?: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 		return 1
+ 	else
+ 		local cmd=$(command -v "${1}")
+@@ -106,7 +115,7 @@ function installed? {
+ 
+ function require {
+ 	if empty? "{1}"; then
+-		error! "require: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 	else
+ 		local func="__require_${1}"
+ 
+@@ -121,7 +130,7 @@ function require {
+ 
+ function require! {
+ 	if empty? "${1}"; then
+-		error! "require!: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 		return 1
+ 	else
+ 		require "${1}" || (error! "unsatisfied requirement: ${1}" ; return 1)
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   nicer
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	test
+
+no changes added to commit (use "git add" and/or "git commit -a")
+diff --git a/nicer b/nicer
+index 219854c..6aeb584 100755
+--- a/nicer
++++ b/nicer
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env bash
+ 
++alias not='!'
++
+ # convenience output functions
+ 
+ function fatal {
+@@ -90,11 +92,18 @@ function nonempty? {
+ 	return ${?}
+ }
+ 
++function number? {
++	case "${1}" in
++		''|*[!0-9]* ) return 1 ;;
++		* ) return 0 ;;
++	esac
++}
++
+ # dependency/compatibility functions
+ 
+ function installed? {
+ 	if empty? "${1}"; then
+-		error! "installed?: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 		return 1
+ 	else
+ 		local cmd=$(command -v "${1}")
+@@ -106,7 +115,7 @@ function installed? {
+ 
+ function require {
+ 	if empty? "{1}"; then
+-		error! "require: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 	else
+ 		local func="__require_${1}"
+ 
+@@ -121,7 +130,7 @@ function require {
+ 
+ function require! {
+ 	if empty? "${1}"; then
+-		error! "require!: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 		return 1
+ 	else
+ 		require "${1}" || (error! "unsatisfied requirement: ${1}" ; return 1)
+LICENSE
+nicer
+README.md
+test
+diff --git a/nicer b/nicer
+index 219854c..eb94c3b 100755
+--- a/nicer
++++ b/nicer
+@@ -1,5 +1,9 @@
+ #!/usr/bin/env bash
+ 
++alias not='!'
++
++
++#########3
+ # convenience output functions
+ 
+ function fatal {
+@@ -90,11 +94,18 @@ function nonempty? {
+ 	return ${?}
+ }
+ 
++function number? {
++	case "${1}" in
++		''|*[!0-9]* ) return 1 ;;
++		* ) return 0 ;;
++	esac
++}
++
+ # dependency/compatibility functions
+ 
+ function installed? {
+ 	if empty? "${1}"; then
+-		error! "installed?: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 		return 1
+ 	else
+ 		local cmd=$(command -v "${1}")
+@@ -106,7 +117,7 @@ function installed? {
+ 
+ function require {
+ 	if empty? "{1}"; then
+-		error! "require: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 	else
+ 		local func="__require_${1}"
+ 
+@@ -121,7 +132,7 @@ function require {
+ 
+ function require! {
+ 	if empty? "${1}"; then
+-		error! "require!: missing argument"
++		error! "${FUNCNAME[0]}: missing argument"
+ 		return 1
+ 	else
+ 		require "${1}" || (error! "unsatisfied requirement: ${1}" ; return 1)
