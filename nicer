@@ -164,7 +164,7 @@ function __require_python2 {
 }
 
 function __require_python3 {
-	installed? python3 || [[ $(__version_python) -eq 2 ]]
+	installed? python3 || [[ $(__version_python) -eq 3 ]]
 	return ${1}
 }
 
