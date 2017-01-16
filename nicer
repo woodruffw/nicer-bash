@@ -224,6 +224,16 @@ function __require_ruby21 {
 }
 
 function __require_ruby22 {
-	installed? ruby2.2 || [[ $(__ruby_version) = "2.2" ]]
+	installed? ruby2.2 || [[ $(__version_ruby) = "2.2" ]]
+	return ${?}
+}
+
+function __require_ruby23 {
+	installed? ruby2.3 || [[ $(__version_ruby) = "2.3" ]]
+	return ${?}
+}
+
+function __require_ruby24 {
+	installed? ruby2.4 || [[ $(__version_ruby) = "2.4" ]]
 	return ${?}
 }
